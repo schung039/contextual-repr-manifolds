@@ -2,7 +2,7 @@
 
 Under construction, will be ready by July 9, 2020.
 
-Code for [ Emergence of Separable Manifolds in Deep Language Representations ] (https://arxiv.org/pdf/2006.01095.pdf), to appear at ICML 2020.
+Code for [ Emergence of Separable Manifolds in Deep Language Representations ](https://arxiv.org/pdf/2006.01095.pdf), to appear at ICML 2020.
 
 
 ## Reference
