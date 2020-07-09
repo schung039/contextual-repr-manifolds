@@ -96,7 +96,7 @@ optional arguments:
 ## MFTMA analysis
 
 ```buildoutcfg
-ython mftma_analysis.py -h
+python mftma_analysis.py -h
 usage: mftma_analysis.py [-h] [--num_layers NUM_LAYERS] [--kappa KAPPA]
                          [--n_t N_T] [--feature_dir FEATURE_DIR]
                          [--mftma_analysis_dir MFTMA_ANALYSIS_DIR]
