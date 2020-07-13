@@ -9,20 +9,21 @@ from transformers import AutoTokenizer, AutoConfig, AutoModel
 
 parser = argparse.ArgumentParser(description='Extract linguistic features from Transformer.')
 
-# Input files
-parser.add_argument('--dataset_file', type=str, default="dataset/train_pos.txt",
+# Input
+parser.add_argument('--dataset_file', type=str, default="dataset/ptb_pos.txt",
                     help='Input file with the relevant dataset. Each line contains the '
                          'space-separated words of the sentence,  the tabular character (\t) and '
                          'the space-separated respective tags.')
 parser.add_argument('--tag_file', type=str,
                     default="dataset/relevant_pos.txt",
-                    help='Input file with the list of tags to use for the MFTMA analysis')
+                    help='Input file with the list of tags to use for the MFTMA analysis/')
 parser.add_argument('--sample', type=str,
                     default="dataset/sample_seed_0.pkl",
                     help='Input file containing the line index, '
-                         'word index and tag of the randomly sampled dataset (output from prepare_data.py.')
+                         'word index and tag of the randomly sampled dataset (output from '
+                         'prepare_data.py.')
 
-# Output file
+# Output
 parser.add_argument('--feature_dir', type=str, default='features',
                     help='Output feature data directory.')
 
@@ -33,7 +34,7 @@ parser.add_argument('--pretrained_model_name', type=str, default='bert-base-case
 parser.add_argument('--mask', action='store_true', default=False,
                     help='Boolean indicating whether to mask relevant word.')
 parser.add_argument('--random_init', action='store_true', default=False,
-                    help='Boolean indication whether to randomly initialize the model')
+                    help='Boolean indication whether to randomly initialize the model.')
 
 
 args = parser.parse_args()
@@ -43,14 +44,11 @@ print('Extracting Features')
 
 tokenizer = AutoTokenizer.from_pretrained(args.pretrained_model_name)
 config = AutoConfig.from_pretrained(args.pretrained_model_name, output_hidden_states=True)
-if args.random_init:
-    print('Randomized Initialization of the model')
+if args.random_init: # random initialization of the model
     model = AutoModel.from_config(config)
 else:
-    print('Normal initialization of the model')
     model = AutoModel.from_pretrained(args.pretrained_model_name, config=config)
 
-# Loading the relevant classes
 manifold_vectors = defaultdict(dict)
 with open(args.tag_file) as f:
     for tag in f:

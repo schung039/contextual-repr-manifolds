@@ -8,25 +8,25 @@ parser = argparse.ArgumentParser(description='Prepare data for MFTMA analysis by
                                              'contains between min_manifold_size and '
                                              'max_manifold_size number of samples.')
 
-# input files
+# Input
 parser.add_argument('--dataset_file', type=str, default="dataset/ptb_pos.txt",
                     help='Input file with the relevant dataset. Each line contains the '
                          'space-separated words of the sentence,  the tabular character (\\t) and '
                          'the space-separated respective tags.')
 parser.add_argument('--tag_file', type=str,
                     default="dataset/relevant_pos.txt",
-                    help='Input file with the list of tags to use for the MFTMA analysis')
+                    help='Input file with the list of tags to use for the MFTMA analysis/')
 
-# output files
-parser.add_argument('--sample', type=str, default="dataset/sample",
-                    help='Output file prefix. This file contains the  line index, '
+# Output
+parser.add_argument('--sample', type=str, default="dataset/sample_seed_0.pkl",
+                    help='Output file containing the  line index, '
                          'word index and tag of the randomly sampled dataset.')
 
-# parameters
+# Parameters
 parser.add_argument('--max_manifold_size', type=int, default=50,
-                    help='The maximal number of words per manifold')
+                    help='The maximal number of words per manifold.')
 parser.add_argument('--min_manifold_size', type=int, default=1,
-                    help='The minimal number of words per manifold')
+                    help='The minimal number of words per manifold.')
 parser.add_argument('--seed', type=int, default=0,
                     help='Randomization seed.')
 
@@ -66,5 +66,4 @@ for tag in tag2location:
 
 print('Number of Words', word_count)
 print('Number of Manifolds', len(tag2location))
-pkl.dump(line_word_tag_map, open(args.sample + '_seed_' + str(args.seed) + '.pkl',
-                                 'wb+'))
+pkl.dump(line_word_tag_map, open(args.sample,'wb+'))

@@ -20,7 +20,6 @@ dimensions = []
 correlations = []
 
 for layer in range(1,args.num_layers+1):
-    print('LOADING FEATURE FILES')
     temp_data = pkl.load(open(os.path.join(args.mftma_analysis_dir,str(layer)+'.pkl'), 'rb+'))
     a = 1 / np.mean(1 / temp_data['a'])
     r = np.mean(temp_data['r'])
@@ -36,6 +35,8 @@ for layer in range(1,args.num_layers+1):
     r /= norm_r
     d /= norm_d
     r0 /= norm_r0
+    print("{} capacity: {:4f}, radius {:4f}, dimension {:4f}, correlation {:4f}".format(
+        'LAYER_' + str(layer), a, r, d, r0))
 
     capacities.append(a)
     radii.append(r)
